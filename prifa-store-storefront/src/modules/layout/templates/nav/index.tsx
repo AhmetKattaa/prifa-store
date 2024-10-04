@@ -47,6 +47,13 @@ export default async function Nav() {
               >
                 Account
               </LocalizedClientLink>
+              <LocalizedClientLink
+                className="hover:text-ui-fg-base"
+                href="/about"
+                data-testid="nav-about-link"
+              >
+                About
+              </LocalizedClientLink>
             </div>
             <Suspense
               fallback={

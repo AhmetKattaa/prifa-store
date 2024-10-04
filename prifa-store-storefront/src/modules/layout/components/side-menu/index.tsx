@@ -11,6 +11,7 @@ import CountrySelect from "../country-select"
 
 const SideMenuItems = {
   Home: "/",
+  About: "/about",
   Store: "/store",
   Search: "/search",
   Account: "/account",
@@ -25,7 +26,7 @@ const SideMenu = ({ regions }: { regions: Region[] | null }) => {
       <div className="flex items-center h-full">
         <Popover className="h-full flex">
           {({ open, close }) => (
-            <>
+            <div>
               <div className="relative flex h-full">
                 <Popover.Button data-testid="nav-menu-button" className="relative h-full flex items-center transition-all ease-out duration-200 focus:outline-none hover:text-ui-fg-base">
                   Menu
@@ -92,7 +93,7 @@ const SideMenu = ({ regions }: { regions: Region[] | null }) => {
                   </div>
                 </Popover.Panel>
               </Transition>
-            </>
+            </div>
           )}
         </Popover>
       </div>
