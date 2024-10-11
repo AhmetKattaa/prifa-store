@@ -1,4 +1,4 @@
-const path = require("path")
+const path = require("path");
 
 module.exports = {
   darkMode: "class",
@@ -21,6 +21,10 @@ module.exports = {
         padding: "padding-top padding-right padding-bottom padding-left",
       },
       colors: {
+        primary: '#AA121E',   // PrifaCoffee ana rengi
+        secondary: '#333333', // Yardımcı renk
+        background: '#f7f7f7', // Arka plan
+        accent: '#ffcc00', // Vurgu rengi
         grey: {
           0: "#FFFFFF",
           5: "#F9FAFB",
@@ -59,16 +63,7 @@ module.exports = {
         "3xl": "2rem",
       },
       fontFamily: {
-        sans: [
-          "Inter",
-          "-apple-system",
-          "BlinkMacSystemFont",
-          "Segoe UI",
-          "Roboto",
-          "Helvetica Neue",
-          "Ubuntu",
-          "sans-serif",
-        ],
+        sans: ['Inter', 'sans-serif'],  // PrifaCoffee yazı tipi
       },
       keyframes: {
         ring: {
@@ -159,4 +154,4 @@ module.exports = {
     },
   },
   plugins: [require("tailwindcss-radix")()],
-}
+};
