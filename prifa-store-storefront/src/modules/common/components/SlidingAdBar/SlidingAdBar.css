@@ -1,0 +1,31 @@
+/* AdBar için kapsayıcı */
+.sliding-adbar-container {
+    overflow: hidden;
+    background-color: #AA121E;
+    padding: 10px 0;
+  }
+  
+  /* İçeriklerin bulunduğu alan */
+  .sliding-content {
+    display: flex;
+    width: 100%; /* İçeriklerin yan yana görünmesi için */
+    animation: slide 15s linear infinite; /* Animasyon */
+  }
+  
+  /* Reklam setleri */
+  .ad-set {
+    display: flex;
+    flex-shrink: 0;
+    justify-content: space-around;
+    width: 100%; /* Her set ekran genişliğinin %100'ünü kaplar */
+  }
+  
+  @keyframes slide {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+  
