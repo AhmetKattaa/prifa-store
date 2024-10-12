@@ -3,6 +3,12 @@
 import { Button, Heading } from "@medusajs/ui"
 import Link from "next/link";
 import SlidingAdBar from './../../../common/components/SlidingAdBar/index';
+import Section2 from './../Section2/index';
+import Section3 from './../Section3/index';
+import Section4 from './../Section4/index';
+import Section5 from './../Section5/index';
+
+
 
 const Hero = () => {
   return (
@@ -30,6 +36,10 @@ const Hero = () => {
       </div>
     </div>
     <SlidingAdBar />
+    <Section2 />
+    <Section3 />
+    <Section4 />
+    <Section5 />
     </>
   );
 };

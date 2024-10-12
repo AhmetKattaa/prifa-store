@@ -2,7 +2,7 @@ import React from 'react';
 
 const SlidingAdBar = () => {
   return (
-    <div className="overflow-hidden bg-gray-200">
+    <div className="overflow-hidden bg-gray-200 mb-10">
       <div className="flex animate-slide">
         <div className="flex items-center space-x-10">
           <span className="text-xl font-bold">Special Offer: Buy 1 Get 1 Free!</span>
