@@ -7,12 +7,14 @@ import Section2 from './../Section2/index';
 import Section3 from './../Section3/index';
 import Section4 from './../Section4/index';
 import Section5 from './../Section5/index';
+import PopupModal from './../popup/index';
 
 
 
 const Hero = () => {
   return (
     <>
+    <PopupModal />
     <div className="p-30 h-screen w-full relative bg-cover bg-[url('https://images.pexels.com/photos/28856365/pexels-photo-28856365.png?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')]">
       {/* İçerik Alanı - Solda Hizalı */}
       <div className="ml-16 absolute inset-0 z-10 flex flex-col justify-center items-start pl-8 md:pl-16 text-left gap-6 bg-white bg-opacity-0">
