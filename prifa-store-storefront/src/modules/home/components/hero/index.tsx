@@ -7,6 +7,7 @@ import Section2 from './../Section2/index';
 import Section3 from './../Section3/index';
 import Section4 from './../Section4/index';
 import Section5 from './../Section5/index';
+import Section6 from './../Section6/index';
 import PopupModal from './../popup/index';
 
 
@@ -42,6 +43,7 @@ const Hero = () => {
     <Section3 />
     <Section4 />
     <Section5 />
+    <Section6 />
     </>
   );
 };
