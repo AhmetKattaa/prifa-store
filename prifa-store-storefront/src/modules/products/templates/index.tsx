@@ -18,6 +18,7 @@ type ProductTemplateProps = {
   countryCode: string
 }
 
+
 const ProductTemplate: React.FC<ProductTemplateProps> = ({
   product,
   region,
@@ -30,17 +31,34 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
   return (
     <>
       <div
-        className="content-container flex flex-col small:flex-row small:items-start py-6 relative"
+        className="content-container flex flex-row gap-8 py-6 relative"
         data-testid="product-container"
       >
-        <div className="flex flex-col small:sticky small:top-48 small:py-0 small:max-w-[300px] w-full py-8 gap-y-6">
-          <ProductInfo product={product} />
-          <ProductTabs product={product} />
+        {/* Sol sütun: Küçük görseller */}
+        <div
+          className="w-32 flex flex-col gap-4 max-h-[600px] sticky top-24 overflow-y-auto"
+        >
+          {product.images?.map((image, index) => (
+            <img
+              key={index}
+              src={image.url}
+              alt={`Thumbnail ${index + 1}`}
+              className="w-36 h-36 object-cover rounded-lg cursor-pointer hover:opacity-80 transition"
+            />
+          ))}
         </div>
-        <div className="block w-full relative">
+
+        {/* Orta sütun: Ana görsel galerisi */}
+        <div className="flex-1">
           <ImageGallery images={product?.images || []} />
         </div>
-        <div className="flex flex-col small:sticky small:top-48 small:py-0 small:max-w-[300px] w-full py-8 gap-y-12">
+
+        {/* Sağ sütun: Ürün bilgisi ve aksiyonlar */}
+        <div
+          className="w-100 flex flex-col gap-y-8 sticky top-24 overflow-y-auto max-h-[600px]"
+        >
+          <ProductInfo product={product} />
+          <ProductTabs product={product} />
           <ProductOnboardingCta />
           <Suspense
             fallback={
@@ -55,8 +73,10 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
           </Suspense>
         </div>
       </div>
+
+      {/* Alt bölüm: İlgili ürünler */}
       <div
-        className="content-container my-16 small:my-32"
+        className="content-container my-12"
         data-testid="related-products-container"
       >
         <Suspense fallback={<SkeletonRelatedProducts />}>

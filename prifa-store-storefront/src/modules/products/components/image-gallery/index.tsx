@@ -9,28 +9,30 @@ type ImageGalleryProps = {
 const ImageGallery = ({ images }: ImageGalleryProps) => {
   return (
     <div className="flex items-start relative">
+      {/* Görselleri dikey bir düzenle sıralıyoruz */}
       <div className="flex flex-col flex-1 small:mx-16 gap-y-4">
-        {images.map((image, index) => {
-          return (
-            <Container
-              key={image.id}
-              className="relative aspect-[29/34] w-full overflow-hidden bg-ui-bg-subtle"
-              id={image.id}
-            >
-              <Image
-                src={image.url}
-                priority={index <= 2 ? true : false}
-                className="absolute inset-0 rounded-rounded"
-                alt={`Product image ${index + 1}`}
-                fill
-                sizes="(max-width: 576px) 280px, (max-width: 768px) 360px, (max-width: 992px) 480px, 800px"
-                style={{
-                  objectFit: "cover",
-                }}
-              />
-            </Container>
-          )
-        })}
+        {images.map((image, index) => (
+          <Container
+            key={image.id}
+            className="relative overflow-hidden bg-ui-bg-subtle"
+            id={image.id}
+            style={{ display: 'inline-block' }}
+          >
+            {/* Next.js Image bileşenini layout ile kullanıyoruz */}
+            <Image
+              src={image.url}
+              priority={index <= 2}
+              alt={`Product image ${index + 1}`}
+              layout="responsive" // Görsel boyutlarını otomatik ayarlar
+              width={800} // Varsayılan genişlik
+              height={600} // Varsayılan yükseklik
+              className="rounded-lg"
+              style={{
+                objectFit: "contain", // Görseli kırpmadan sığdırır
+              }}
+            />
+          </Container>
+        ))}
       </div>
     </div>
   )
