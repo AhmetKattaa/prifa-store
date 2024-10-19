@@ -3,7 +3,7 @@ import './SlidingAdBar.css'; // CSS dosyasını bağlıyoruz
 
 const SlidingAdBar = () => {
   return (
-    <div className="sliding-adbar-container text-white mb-8">
+    <div className="sliding-adbar-container text-white mb-10">
       <div className="sliding-content">
         {/* Aynı içeriklerin iki kez tekrarlandığı alan */}
         <div className="ad-set">
