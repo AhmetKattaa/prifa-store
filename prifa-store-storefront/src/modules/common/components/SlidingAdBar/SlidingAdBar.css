@@ -1,31 +1,39 @@
-/* AdBar için kapsayıcı */
+/* AdBar kapsayıcısı */
 .sliding-adbar-container {
-    overflow: hidden;
-    background-color: #AA121E;
-    padding: 10px 0;
+  overflow: hidden;
+  background-color: #AA121E;
+  padding: 10px 0;
+  white-space: nowrap;
+}
+
+/* İçeriklerin bulunduğu alan */
+.sliding-content {
+  display: flex;
+  width: 200%; /* İçeriklerin kayması için genişlik */
+  animation: slide 15s linear infinite;
+}
+
+/* Reklam setleri */
+.ad-set {
+  display: flex;
+  justify-content: space-around;
+  flex: 1;
+}
+
+/* Animasyon */
+@keyframes slide {
+  0% {
+    transform: translateX(0);
   }
-  
-  /* İçeriklerin bulunduğu alan */
-  .sliding-content {
-    display: flex;
-    width: 100%; /* İçeriklerin yan yana görünmesi için */
-    animation: slide 15s linear infinite; /* Animasyon */
+  100% {
+    transform: translateX(-50%);
   }
-  
-  /* Reklam setleri */
-  .ad-set {
-    display: flex;
-    flex-shrink: 0;
-    justify-content: space-around;
-    width: 100%; /* Her set ekran genişliğinin %100'ünü kaplar */
+}
+
+/* Responsive ayarlar */
+@media (max-width: 768px) {
+  .ad-set span {
+    font-size: 0.875rem;
+    padding: 0 10px;
   }
-  
-  @keyframes slide {
-    0% {
-      transform: translateX(0);
-    }
-    100% {
-      transform: translateX(-50%);
-    }
-  }
-  
+}
