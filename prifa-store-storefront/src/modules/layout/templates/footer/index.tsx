@@ -1,4 +1,6 @@
 import React from 'react';
+import Link from "next/link";
+
 
 const Footer = () => {
   return (
@@ -55,6 +57,7 @@ const Footer = () => {
           <img className="w-10" src="https://img.icons8.com/color/48/000000/google-pay.png" alt="Google Pay" />
         </div>
       </div>
+      <h6 className="text-center">Developed By <Link className=" border-b border-white" href="google.com">Ahmad KATTAA</Link></h6>
     </footer>
   );
 };
