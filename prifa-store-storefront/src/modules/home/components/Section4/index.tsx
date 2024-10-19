@@ -1,11 +1,21 @@
 import React from 'react';
 import Link from "next/link";
 
-
 const Section4 = () => {
   return (
-    <section className="bg-[#FFFAEC] py-2 px-16">
-      <div className="max-w-8xl py-44 rounded-3xl text-white mx-auto bg-no-repeat bg-[#4E3828] bg-cover bg-center bg-[url('https://cdn.shopify.com/s/files/1/0699/0787/4083/files/Home-Page-Section-3_1.jpg?v=1720183067')]">
+    <section className="bg-[#FFFAEC] py-4 px-6 md:px-16">
+      <div
+        className="
+          max-w-8xl py-20 md:py-44 rounded-3xl text-white mx-auto 
+          bg-cover bg-center bg-no-repeat 
+          bg-[url('https://lh3.googleusercontent.com/d/1ggGyeT1bAM2IiWljjdpbdcdRr8qwZfY5=w1000?authuser=1/view')] 
+          md:bg-[url('https://cdn.shopify.com/s/files/1/0699/0787/4083/files/Home-Page-Section-3_1.jpg?v=1720183067')]
+        "
+        style={{
+          backgroundSize: 'cover', 
+          backgroundPosition: 'center',
+        }}
+      >
         <div className="flex flex-col md:flex-row items-center">
           {/* Sol taraf: Simgeler ve açıklamalar */}
           <div className="flex-1 grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -43,56 +53,61 @@ const Section4 = () => {
           </div>
         </div>
       </div>
-      <div>
-        {/* Alt kısım: Üç Sütun ve Buton */}
-        <div className="mt-16 text-center">
-          <div className="flex flex-col md:flex-row justify-center items-center gap-8">
-            <div className="flex flex-col items-center">
-              <img
-                src="https://cdn.shopify.com/s/files/1/0699/0787/4083/files/bolt.png?v=1719389049&width=2048"
-                alt="No Crash or Jitters"
-                className="w-16 h-16 mb-4"
-              />
-              <h3 className="text-2xl font-bold text-[#4E3828]">No Crash or Jitters</h3>
-              <p className="text-[#4E3828] max-w-xs">
-                Experience clean energy without the dreaded crash or jitters. PriFa Coffee Tablets keep you steady and alert.
-              </p>
-            </div>
 
-            <div className="flex flex-col items-center">
-              <img
-                src="https://cdn.shopify.com/s/files/1/0699/0787/4083/files/save-money.png?v=1719389049&width=2048"
-                alt="Affordable Price"
-                className="w-16 h-16 mb-4"
-              />
-              <h3 className="text-2xl font-bold text-[#4E3828]">> $0.50 per serving</h3>
-              <p className="text-[#4E3828] max-w-xs">
-                Affordable and cost-effective, each PriFa Coffee Tablet is less than $0.50, saving you money daily.
-              </p>
-            </div>
-
-            <div className="flex flex-col items-center">
-              <img
-                src="https://cdn.shopify.com/s/files/1/0699/0787/4083/files/coffee-beans_3.png?v=1719389049&width=2048"
-                alt="Quality Ground Coffee"
-                className="w-16 h-16 mb-4"
-              />
-              <h3 className="text-2xl font-bold text-[#4E3828]">Quality Ground Coffee</h3>
-              <p className="text-[#4E3828] max-w-xs">
-                High quality ground coffee beans, that are sugar free, non-GMO, vegan and gluten free. Suitable for all.
-              </p>
-            </div>
+      <div className="mt-16 text-center">
+        <div className="flex flex-col md:flex-row justify-center items-center gap-8">
+          <div className="flex flex-col items-center">
+            <img
+              src="https://cdn.shopify.com/s/files/1/0699/0787/4083/files/bolt.png?v=1719389049&width=2048"
+              alt="No Crash or Jitters"
+              className="w-16 h-16 mb-4"
+            />
+            <h3 className="text-2xl font-bold text-[#4E3828]">No Crash or Jitters</h3>
+            <p className="text-[#4E3828] max-w-xs">
+              Experience clean energy without the dreaded crash or jitters. PriFa Coffee Tablets keep you steady and alert.
+            </p>
           </div>
-          <Link href="/store">
-            <button className="mt-8 bg-[#AA121E] text-white text-lg md:text-xl font-semibold px-8 py-3 rounded-full shadow-lg hover:bg-[#B85928] transition">
-              SHOP NOW
-            </button>
-          </Link>
+
+          <div className="flex flex-col items-center">
+            <img
+              src="https://cdn.shopify.com/s/files/1/0699/0787/4083/files/save-money.png?v=1719389049&width=2048"
+              alt="Affordable Price"
+              className="w-16 h-16 mb-4"
+            />
+            <h3 className="text-2xl font-bold text-[#4E3828]">Less than $0.50 per serving</h3>
+            <p className="text-[#4E3828] max-w-xs">
+              Affordable and cost-effective, each PriFa Coffee Tablet is less than $0.50, saving you money daily.
+            </p>
+          </div>
+
+          <div className="flex flex-col items-center">
+            <img
+              src="https://cdn.shopify.com/s/files/1/0699/0787/4083/files/coffee-beans_3.png?v=1719389049&width=2048"
+              alt="Quality Ground Coffee"
+              className="w-16 h-16 mb-4"
+            />
+            <h3 className="text-2xl font-bold text-[#4E3828]">Quality Ground Coffee</h3>
+            <p className="text-[#4E3828] max-w-xs">
+              High quality ground coffee beans, that are sugar free, non-GMO, vegan and gluten free. Suitable for all.
+            </p>
+          </div>
         </div>
+        <Link href="/store">
+          <button className="mt-8 bg-[#AA121E] text-white text-lg md:text-xl font-semibold px-8 py-3 rounded-full shadow-lg hover:bg-[#B85928] transition">
+            SHOP NOW
+          </button>
+        </Link>
       </div>
-      <img className="mb-4" width="100" src="https://cdn.shopify.com/s/files/1/0771/0860/9337/files/javy_star_1.png?v=1705290086&width=1800"/>
+
+      <img
+        className="mb-4 mx-auto"
+        width="100"
+        src="https://lh3.googleusercontent.com/d/1gTqlfRKncA2tQ-_z685R2m-tSz5oUYnY=w1000?authuser=1/view"
+        alt="Decoration"
+      />
     </section>
   );
 };
 
 export default Section4;
+
