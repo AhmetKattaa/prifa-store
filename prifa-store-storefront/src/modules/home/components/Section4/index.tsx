@@ -93,18 +93,11 @@ const Section4 = () => {
           </div>
         </div>
         <Link href="/store">
-          <button className="mt-8 bg-[#AA121E] text-white text-lg md:text-xl font-semibold px-8 py-3 rounded-full shadow-lg hover:bg-[#B85928] transition">
+          <button className="mt-8 mb-10 bg-[#AA121E] text-white text-lg md:text-xl font-semibold px-10 py-3 rounded-full shadow-lg hover:bg-[#B85928] transition">
             SHOP NOW
           </button>
         </Link>
       </div>
-
-      <img
-        className="mb-4 mx-auto"
-        width="100"
-        src="https://lh3.googleusercontent.com/d/1gTqlfRKncA2tQ-_z685R2m-tSz5oUYnY=w1000?authuser=1/view"
-        alt="Decoration"
-      />
     </section>
   );
 };
