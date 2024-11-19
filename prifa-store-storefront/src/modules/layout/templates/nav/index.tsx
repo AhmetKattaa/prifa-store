@@ -48,11 +48,19 @@ export default function Navbar() {
             <Link href="/">
               <span className="text-white text-md hover:text-gray-300">Home</span>
             </Link>
+            <Link href="/about">
+              <span className="block px-3 py-2 rounded-md text-base font-medium text-white hover:text-gray-300">
+                About
+              </span>
+            </Link>
             <Link href="/store">
-              <span className="text-white text-md hover:text-gray-300">Shop</span>
+              <span className="text-white text-md hover:text-gray-300">Shop All</span>
             </Link>
             <Link href="/contact">
               <span className="text-white text-md hover:text-gray-300">Contact</span>
+            </Link>
+            <Link href="/create-your-box">
+              <span className="text-white text-md hover:text-gray-300">Create Your Box</span>
             </Link>
           </div>
 
@@ -102,14 +110,24 @@ export default function Navbar() {
                 Home
               </span>
             </Link>
+            <Link href="/about">
+              <span className="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-gray-700">
+                About
+              </span>
+            </Link>
             <Link href="/shop">
               <span className="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-gray-700">
-                Shop
+                Shop All
               </span>
             </Link>
             <Link href="/contact">
               <span className="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-gray-700">
                 Contact
+              </span>
+            </Link>
+            <Link href="/create-your-box">
+              <span className="text-white text-md hover:text-gray-700">
+                Create Your Box
               </span>
             </Link>
           </div>
