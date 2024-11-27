@@ -1,65 +1,60 @@
-import { StoreGetProductsParams } from "@medusajs/medusa"
-import { PricedProduct } from "@medusajs/medusa/dist/types/pricing"
+import { StoreGetProductsParams } from "@medusajs/medusa";
+import { PricedProduct } from "@medusajs/medusa/dist/types/pricing";
 
-import { getProductsList, getRegion } from "@lib/data"
+import { getProductsList, getRegion } from "@lib/data";
 
-import ProductPreview from "../product-preview"
+import ProductPreview from "../product-preview";
 
 type RelatedProductsProps = {
-  product: PricedProduct
-  countryCode: string
-}
+  product: PricedProduct;
+  countryCode: string;
+};
 
 export default async function RelatedProducts({
   product,
   countryCode,
 }: RelatedProductsProps) {
-  const region = await getRegion(countryCode)
+  const region = await getRegion(countryCode);
 
   if (!region) {
-    return null
+    console.error("Region not found for countryCode:", countryCode);
+    return (
+      <div className="text-center py-10">
+        <p className="text-gray-500">No region found for this product.</p>
+      </div>
+    );
   }
 
-  // edit this function to define your related products logic
-  const setQueryParams = (): StoreGetProductsParams => {
-    const params: StoreGetProductsParams = {}
+  // Koleksiyon ID'sine dayalı sorgu parametreleri
+  const queryParams: StoreGetProductsParams = {
+    collection_id: product.collection_id ? [product.collection_id] : [],
+    is_giftcard: false,
+  };
 
-    if (region?.id) {
-      params.region_id = region.id
-    }
+  console.log("Query Params:", queryParams);
 
-    if (region?.currency_code) {
-      params.currency_code = region.currency_code
-    }
-
-    if (product.collection_id) {
-      params.collection_id = [product.collection_id]
-    }
-
-    if (product.tags) {
-      params.tags = product.tags.map((t) => t.value)
-    }
-
-    params.is_giftcard = false
-
-    return params
-  }
-
-  const queryParams = setQueryParams()
-
+  // API çağrısı yapılıyor ve ilgili ürünler getiriliyor
   const productPreviews = await getProductsList({
     queryParams,
     countryCode,
-  }).then(({ response }) =>
-    response.products.filter(
+  }).then(({ response }) => {
+    console.log("Related Products Response:", response.products); // API yanıtını kontrol
+    return response.products.filter(
       (productPreview) => productPreview.id !== product.id
-    )
-  )
+    );
+  });
 
+  // Eğer sonuç boşsa mesaj göster
   if (!productPreviews.length) {
-    return null
+    console.warn("No related products found for query params:", queryParams);
+    return (
+      <div className="text-center py-10">
+        <p className="text-gray-500">No related products found.</p>
+      </div>
+    );
   }
 
+  // İlgili ürünleri render etme
   return (
     <div className="product-page-constraint">
       <div className="flex flex-col items-center text-center mb-16">
@@ -79,5 +74,5 @@ export default async function RelatedProducts({
         ))}
       </ul>
     </div>
-  )
+  );
 }

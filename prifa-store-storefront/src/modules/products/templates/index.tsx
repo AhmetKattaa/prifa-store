@@ -1,32 +1,54 @@
-import { Region } from "@medusajs/medusa"
-import { PricedProduct } from "@medusajs/medusa/dist/types/pricing"
-import React, { Suspense } from "react"
+import { Region } from "@medusajs/medusa";
+import { PricedProduct } from "@medusajs/medusa/dist/types/pricing";
+import React, { Suspense } from "react";
 
-import ImageGallery from "@modules/products/components/image-gallery"
-import ProductActions from "@modules/products/components/product-actions"
-import ProductOnboardingCta from "@modules/products/components/product-onboarding-cta"
-import ProductTabs from "@modules/products/components/product-tabs"
-import RelatedProducts from "@modules/products/components/related-products"
-import ProductInfo from "@modules/products/templates/product-info"
-import SkeletonRelatedProducts from "@modules/skeletons/templates/skeleton-related-products"
-import { notFound } from "next/navigation"
-import ProductActionsWrapper from "./product-actions-wrapper"
+import ImageGallery from "@modules/products/components/image-gallery";
+import ProductActions from "@modules/products/components/product-actions";
+import ProductOnboardingCta from "@modules/products/components/product-onboarding-cta";
+import ProductTabs from "@modules/products/components/product-tabs";
+import RelatedProducts from "@modules/products/components/related-products";
+import FlavorProducts from "@modules/products/components/flavor-products";
+import ProductInfo from "@modules/products/templates/product-info";
+import SkeletonRelatedProducts from "@modules/skeletons/templates/skeleton-related-products";
+import { notFound } from "next/navigation";
+import ProductActionsWrapper from "./product-actions-wrapper";
+import { getProductsList, getRegion } from "@lib/data";
 
 type ProductTemplateProps = {
-  product: PricedProduct
-  region: Region
-  countryCode: string
-}
+  product: PricedProduct;
+  region: Region;
+  countryCode: string;
+};
 
-
-const ProductTemplate: React.FC<ProductTemplateProps> = ({
+const ProductTemplate: React.FC<ProductTemplateProps> = async ({
   product,
   region,
   countryCode,
 }) => {
   if (!product || !product.id) {
-    return notFound()
+    return notFound();
   }
+
+  // collection_id kontrolü yap
+  const collectionId = product.collection_id || null;
+
+  const relatedProducts = collectionId
+    ? await getProductsList({
+        queryParams: {
+          collection_id: [collectionId],
+          is_giftcard: false,
+        },
+        countryCode,
+      }).then(({ response }) =>
+        response.products.filter((p) => p.id !== product.id)
+      )
+    : [];
+
+  const flavors = relatedProducts.map((p) => ({
+    id: p.id,
+    title: p.title,
+    handle: p.handle, // Handle bilgisi ekleniyor
+  }));
 
   return (
     <>
@@ -53,7 +75,7 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
           <ImageGallery images={product?.images || []} />
         </div>
 
-        {/* Sağ sütun: Ürün bilgisi ve aksiyonlar */}
+        {/* Sağ sütun: Ürün bilgisi, aksiyonlar ve Flavor */}
         <div
           className="w-100 flex flex-col gap-y-8 sticky top-24 overflow-y-auto max-h-[600px]"
         >
@@ -71,6 +93,12 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
           >
             <ProductActionsWrapper id={product.id} region={region} />
           </Suspense>
+
+          {/* Flavor bölümü */}
+          <div className="flavor-section mt-8">
+            <h3 className="text-lg font-bold mb-2">Flavor</h3>
+            <FlavorProducts flavors={flavors} currentProductId={product.id} />
+          </div>
         </div>
       </div>
 
@@ -84,7 +112,7 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
         </Suspense>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default ProductTemplate
+export default ProductTemplate;
