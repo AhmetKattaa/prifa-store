@@ -1,11 +1,13 @@
 "use client";
 
 import React from "react";
+import Thumbnail from "@modules/products/components/thumbnail"; // Thumbnail bileşeni
 
 type Flavor = {
   id: string;
   title: string;
-  handle: string; // Handle bilgisi eklendi
+  handle: string;
+  thumbnail: string | null; // Thumbnail null olabilir
 };
 
 type FlavorProductsProps = {
@@ -22,19 +24,40 @@ const FlavorProducts: React.FC<FlavorProductsProps> = ({
   }
 
   return (
-    <div className="flex flex-col gap-2">
+    <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
       {flavors.map((flavor) => (
-        <button
+        <div
           key={flavor.id}
-          className={`border rounded px-4 py-2 text-sm font-medium ${
-            flavor.id === currentProductId
-              ? "bg-blue-500 text-white"
-              : "bg-white text-black"
-          } hover:bg-blue-100`}
-          onClick={() => (window.location.href = `/products/${flavor.handle}`)} // URL'de handle kullanılıyor
+          className="flex flex-col items-center gap-2 cursor-pointer"
+          onClick={() => (window.location.href = `/products/${flavor.handle}`)}
         >
-          {flavor.title}
-        </button>
+          {/* Çerçeve */}
+          <div
+            className={`w-16 h-16 flex items-center justify-center rounded-full border-2 ${
+              flavor.id === currentProductId ? "border-blue-500" : "border-gray-300"
+            }`}
+          >
+            {/* Fotoğraf */}
+            <div className="w-14 h-14 bg-white rounded-full flex items-center justify-center overflow-hidden">
+              <Thumbnail
+                thumbnail={flavor.thumbnail}
+                size="small" // Küçük boyutlu resim
+                className="object-cover w-full h-full"
+              />
+            </div>
+          </div>
+
+          {/* Ürün İsmi */}
+          <p
+            className={`text-sm font-medium text-center ${
+              flavor.id === currentProductId
+                ? "text-blue-500"
+                : "text-gray-700"
+            }`}
+          >
+            {flavor.title}
+          </p>
+        </div>
       ))}
     </div>
   );

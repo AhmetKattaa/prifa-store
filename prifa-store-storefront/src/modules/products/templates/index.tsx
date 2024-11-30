@@ -48,6 +48,7 @@ const ProductTemplate: React.FC<ProductTemplateProps> = async ({
     id: p.id,
     title: p.title,
     handle: p.handle, // Handle bilgisi ekleniyor
+    thumbnail: p.thumbnail, 
   }));
 
   return (
@@ -80,7 +81,11 @@ const ProductTemplate: React.FC<ProductTemplateProps> = async ({
           className="w-100 flex flex-col gap-y-8 sticky top-24 overflow-y-auto max-h-[600px]"
         >
           <ProductInfo product={product} />
-          <ProductTabs product={product} />
+          {/* Flavor bölümü */}
+          <div className="flavor-section mt-8">
+            <h3 className="text-lg font-bold mb-2">Flavors</h3>
+            <FlavorProducts flavors={flavors} currentProductId={product.id} />
+          </div>
           <ProductOnboardingCta />
           <Suspense
             fallback={
@@ -93,12 +98,6 @@ const ProductTemplate: React.FC<ProductTemplateProps> = async ({
           >
             <ProductActionsWrapper id={product.id} region={region} />
           </Suspense>
-
-          {/* Flavor bölümü */}
-          <div className="flavor-section mt-8">
-            <h3 className="text-lg font-bold mb-2">Flavor</h3>
-            <FlavorProducts flavors={flavors} currentProductId={product.id} />
-          </div>
         </div>
       </div>
 
