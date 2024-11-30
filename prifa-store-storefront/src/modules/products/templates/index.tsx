@@ -12,6 +12,7 @@ import ProductInfo from "@modules/products/templates/product-info";
 import SkeletonRelatedProducts from "@modules/skeletons/templates/skeleton-related-products";
 import { notFound } from "next/navigation";
 import ProductActionsWrapper from "./product-actions-wrapper";
+import IntensityRatings from "@modules/products/components/product-tags"; // Yeni bileşeni import ettik
 import { getProductsList, getRegion } from "@lib/data";
 
 type ProductTemplateProps = {
@@ -76,15 +77,22 @@ const ProductTemplate: React.FC<ProductTemplateProps> = async ({
           <ImageGallery images={product?.images || []} />
         </div>
 
-        {/* Sağ sütun: Ürün bilgisi, aksiyonlar ve Flavor */}
+        {/* Sağ sütun: Ürün bilgisi, aksiyonlar, Flavor ve Intensity Ratings */}
         <div
           className="w-100 flex flex-col gap-y-8 sticky top-24 overflow-y-auto max-h-[600px]"
         >
           <ProductInfo product={product} />
+          
           {/* Flavor bölümü */}
           <div className="flavor-section mt-8">
             <h3 className="text-lg font-bold mb-2">Flavors</h3>
             <FlavorProducts flavors={flavors} currentProductId={product.id} />
+          </div>
+          
+          {/* Intensity Ratings Bölümü */}
+          <div className="intensity-section mt-8">
+            <h3 className="text-lg font-bold mb-2">Intensity Metrics</h3>
+            <IntensityRatings product={product} countryCode={countryCode} />
           </div>
           <ProductOnboardingCta />
           <Suspense
@@ -96,6 +104,8 @@ const ProductTemplate: React.FC<ProductTemplateProps> = async ({
               />
             }
           >
+
+          
             <ProductActionsWrapper id={product.id} region={region} />
           </Suspense>
         </div>
