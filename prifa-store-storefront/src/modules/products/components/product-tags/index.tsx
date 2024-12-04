@@ -21,11 +21,14 @@ const IntensityRatings: React.FC<IntensityRatingsProps> = ({ product }) => {
       {metrics.map((metric) => (
         <div key={metric} className="flex items-center gap-4">
           {/* Metrik başlığı */}
-          <span className="font-bold capitalize w-32">{metric}</span>
+          <span className="font-bold capitalize w-32">
+            {metric}
+            {metric === "caffeine" && ` (${(tagMap[metric] || 0) * 10} mg)`}
+          </span>
 
           {/* Kahve çekirdekleri */}
           <div className="flex gap-1">
-            {[...Array(5)].map((_, index) => (
+            {[...Array(6)].map((_, index) => (
               <div
                 key={index}
                 className={`w-6 h-6 flex items-center justify-center rounded-full ${
