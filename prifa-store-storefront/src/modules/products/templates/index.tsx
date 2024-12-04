@@ -5,15 +5,14 @@ import React, { Suspense } from "react";
 import ImageGallery from "@modules/products/components/image-gallery";
 import ProductActions from "@modules/products/components/product-actions";
 import ProductOnboardingCta from "@modules/products/components/product-onboarding-cta";
-import ProductTabs from "@modules/products/components/product-tabs";
 import RelatedProducts from "@modules/products/components/related-products";
 import FlavorProducts from "@modules/products/components/flavor-products";
 import ProductInfo from "@modules/products/templates/product-info";
 import SkeletonRelatedProducts from "@modules/skeletons/templates/skeleton-related-products";
 import { notFound } from "next/navigation";
 import ProductActionsWrapper from "./product-actions-wrapper";
-import IntensityRatings from "@modules/products/components/product-tags"; // Yeni bileşeni import ettik
-import { getProductsList, getRegion } from "@lib/data";
+import IntensityRatings from "@modules/products/components/product-tags";
+import { getProductsList } from "@lib/data";
 
 type ProductTemplateProps = {
   product: PricedProduct;
@@ -30,7 +29,6 @@ const ProductTemplate: React.FC<ProductTemplateProps> = async ({
     return notFound();
   }
 
-  // collection_id kontrolü yap
   const collectionId = product.collection_id || null;
 
   const relatedProducts = collectionId
@@ -48,66 +46,79 @@ const ProductTemplate: React.FC<ProductTemplateProps> = async ({
   const flavors = relatedProducts.map((p) => ({
     id: p.id,
     title: p.title,
-    handle: p.handle, // Handle bilgisi ekleniyor
-    thumbnail: p.thumbnail, 
+    handle: p.handle,
+    thumbnail: p.thumbnail,
   }));
 
   return (
     <>
       <div
-        className="content-container flex flex-row gap-8 py-6 relative"
+        className="content-container flex flex-col lg:flex-row gap-8 py-6 relative"
         data-testid="product-container"
       >
-        {/* Sol sütun: Küçük görseller */}
+        {/* Sol sütun: Küçük görseller (masaüstünde daha geniş) */}
         <div
-          className="w-32 flex flex-col gap-4 max-h-[600px] sticky top-24 overflow-y-auto"
+          className="hidden lg:flex lg:w-36 flex-col gap-4 max-h-[600px] sticky top-24 overflow-y-auto"
         >
           {product.images?.map((image, index) => (
             <img
               key={index}
               src={image.url}
               alt={`Thumbnail ${index + 1}`}
-              className="w-36 h-36 object-cover rounded-lg cursor-pointer hover:opacity-80 transition"
+              className="w-28 h-28 lg:w-36 lg:h-36 object-cover rounded-lg cursor-pointer hover:opacity-80 transition"
             />
           ))}
         </div>
 
-        {/* Orta sütun: Ana görsel galerisi */}
-        <div className="flex-1">
+        {/* Orta sütun: Ana görsel galerisi (daha dar) */}
+        <div className="flex-1 lg:w-[30%] hidden lg:block">
           <ImageGallery images={product?.images || []} />
         </div>
 
-        {/* Sağ sütun: Ürün bilgisi, aksiyonlar, Flavor ve Intensity Ratings */}
+        {/* Sağ sütun: Ürün bilgisi ve aksiyonlar (daha geniş) */}
         <div
-          className="w-100 flex flex-col gap-y-8 sticky top-24 overflow-y-auto max-h-[600px]"
+          className="w-full lg:w-[35%] flex flex-col gap-y-8 sticky top-24 overflow-y-auto max-h-[600px]"
         >
           <ProductInfo product={product} />
-          
+
+          {/* Mobil görünümde galeri fotoğrafları */}
+          <div className="block lg:hidden w-full mt-4">
+            <h3 className="text-lg font-bold mb-4">Gallery</h3>
+            <div className="flex gap-4 overflow-x-auto py-4">
+              {product.images?.map((image, index) => (
+                <img
+                  key={index}
+                  src={image.url}
+                  alt={`Gallery Image ${index + 1}`}
+                  className="w-[80%] h-auto object-cover rounded-lg shadow-md cursor-pointer hover:opacity-90 transition"
+                />
+              ))}
+            </div>
+          </div>
+
           {/* Flavor bölümü */}
           <div className="flavor-section mt-8">
             <h3 className="text-lg font-bold mb-2">Flavors</h3>
             <FlavorProducts flavors={flavors} currentProductId={product.id} />
           </div>
-          
+
           {/* Intensity Ratings Bölümü */}
           <div className="intensity-section mt-8">
             <h3 className="text-lg font-bold mb-2">Intensity Metrics</h3>
             <IntensityRatings product={product} countryCode={countryCode} />
           </div>
-          <ProductOnboardingCta />
-          <Suspense
-            fallback={
-              <ProductActions
-                disabled={true}
-                product={product}
-                region={region}
-              />
-            }
-          >
 
-          
-            <ProductActionsWrapper id={product.id} region={region} />
-          </Suspense>
+          {/* Seçenekler ve "Add to Cart" Butonu */}
+          <div className="mt-8 w-full lg:relative">
+            <ProductOnboardingCta />
+            <Suspense
+              fallback={
+                <ProductActions disabled={true} product={product} region={region} />
+              }
+            >
+              <ProductActionsWrapper id={product.id} region={region} />
+            </Suspense>
+          </div>
         </div>
       </div>
 
