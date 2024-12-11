@@ -32,19 +32,11 @@ const ProductInfo = ({ product }: ProductInfoProps) => {
         {/* Ürün başlığı, H2 seviyesinde stilize edilmiş */}
         <Heading
           level="h2"
-          className="text-3xl leading-10 text-ui-fg-base"
+          className="text-3xl leading-3 text-ui-fg-base"
           data-testid="product-title" // Test için veri kimliği.
         >
           {title} {/* Ürün başlığı */}
         </Heading>
-
-        {/* Ürün açıklaması, stilize edilmiş metin */}
-        <Text
-          className="text-medium text-ui-fg-subtle"
-          data-testid="product-description" // Test için veri kimliği.
-        >
-          {description} {/* Ürün açıklaması */}
-        </Text>
       </div>
     </div>
   )

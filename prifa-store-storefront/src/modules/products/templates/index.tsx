@@ -1,6 +1,7 @@
 import { Region } from "@medusajs/medusa";
 import { PricedProduct } from "@medusajs/medusa/dist/types/pricing";
 import React, { Suspense } from "react";
+import { Heading, Text } from "@medusajs/ui"
 
 import ImageGallery from "@modules/products/components/image-gallery";
 import ProductActions from "@modules/products/components/product-actions";
@@ -50,6 +51,8 @@ const ProductTemplate: React.FC<ProductTemplateProps> = async ({
     thumbnail: p.thumbnail,
   }));
 
+  const { collection, title, description } = product
+
   return (
     <>
       <div
@@ -97,19 +100,15 @@ const ProductTemplate: React.FC<ProductTemplateProps> = async ({
           </div>
 
           {/* Flavor bölümü */}
-          <div className="flavor-section mt-8">
-            <h3 className="text-lg font-bold mb-2">Flavors</h3>
+          <div className="flavor-section mt-0">
+            <h3 className="text-lg font-bold mb-2">Other Flavors</h3>
             <FlavorProducts flavors={flavors} currentProductId={product.id} />
           </div>
 
-          {/* Intensity Ratings Bölümü */}
-          <div className="intensity-section mt-8">
-            <h3 className="text-lg font-bold mb-2">Intensity Metrics</h3>
-            <IntensityRatings product={product} countryCode={countryCode} />
-          </div>
+          
 
           {/* Seçenekler ve "Add to Cart" Butonu */}
-          <div className="mt-8 w-full lg:relative">
+          <div className="mt-0 w-full lg:relative">
             <ProductOnboardingCta />
             <Suspense
               fallback={
@@ -119,6 +118,22 @@ const ProductTemplate: React.FC<ProductTemplateProps> = async ({
               <ProductActionsWrapper id={product.id} region={region} />
             </Suspense>
           </div>
+
+          {/* Intensity Ratings Bölümü */}
+          <div className="intensity-section mt-8">
+            <h3 className="text-lg font-bold mb-2">Intensity Metrics</h3>
+            <IntensityRatings product={product} countryCode={countryCode} />
+          </div>
+
+          {/* Ürün açıklaması, stilize edilmiş metin */}
+          <h1 className="text-lg font-bold mb-0">Desctiption :</h1>
+          <Text
+            className="text-medium text-ui-fg-subtle"
+            data-testid="product-description" // Test için veri kimliği.
+          >
+            {description} {/* Ürün açıklaması */}
+          </Text>
+
         </div>
       </div>
 
